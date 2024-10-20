@@ -1,17 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <title>IC Hello Starter</title>
-  <base href="/" />
-  <link rel="icon" href="/favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Portfolio Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .stock-search {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .stock-search input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .stock-search button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .stock-search button:hover {
+            background-color: #0056b3;
+        }
+        .portfolio {
+            margin-top: 20px;
+        }
+        .portfolio h2 {
+            color: #007bff;
+        }
+        .portfolio ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .portfolio li {
+            padding: 10px;
+            background-color: #f1f1f1;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .portfolio li span {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
 </head>
-
 <body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
 
+    <div class="container">
+        <h1>Stock Portfolio Tracker</h1>
+
+        <!-- Stock Search Section -->
+        <div class="stock-search">
+            <input type="text" id="stock-symbol" placeholder="Enter stock symbol (e.g., AAPL, TSLA)">
+            <button onclick="searchStock()">Search</button>
+        </div>
+
+        <!-- Stock Details Section -->
+        <div id="stock-details">
+            <h2>Stock Details</h2>
+            <p id="stock-name">Stock Name: <span id="name">N/A</span></p>
+            <p id="stock-price">Price: $<span id="price">N/A</span></p>
+            <button onclick="addToPortfolio()">Add to Portfolio</button>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div class="portfolio">
+            <h2>Your Portfolio</h2>
+            <ul id="portfolio-list">
+                <!-- Portfolio items will appear here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Mock stock search function (replace with API call in real implementation)
+        function searchStock() {
+            const symbol = document.getElementById('stock-symbol').value;
+            const stockData = {
+                name: symbol + ' Corporation',
+                price: (Math.random() * 1000).toFixed(2)
+            };
+
+            // Display stock details
+            document.getElementById('name').innerText = stockData.name;
+            document.getElementById('price').innerText = stockData.price;
+        }
+
+        // Add stock to portfolio
+        function addToPortfolio() {
+            const name = document.getElementById('name').innerText;
+            const price = document.getElementById('price').innerText;
+            const portfolioList = document.getElementById('portfolio-list');
+
+            if (name === 'N/A' || price === 'N/A') {
+                alert('Please search for a stock first.');
+                return;
+            }
+
+            // Create new portfolio item
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<span>${name}</span> - $${price}`;
+            portfolioList.appendChild(listItem);
+        }
+    </script>
+
+</body>
 </html>
